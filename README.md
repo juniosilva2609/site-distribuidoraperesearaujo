@@ -20,25 +20,46 @@ python -m http.server 8000
 
 Depois acesse `http://localhost:8000`.
 
-## Como publicar (custo mínimo: só o domínio)
+## Domínio
+
+**Registrado:** `distribuidoraperesearaujo.com.br` (já refletido em todo o site:
+canonical, Open Graph, `robots.txt` e `sitemap.xml`).
+
+## Como publicar (custo mínimo: só o domínio, já pago)
 
 Este site é 100% estático, então a hospedagem pode ser **gratuita**. Três opções,
-todas sem custo de servidor:
+todas sem custo de servidor — escolha uma:
 
-1. **Cloudflare Pages** (recomendado) — conecta direto num repositório GitHub,
-   deploy automático a cada alteração, e o próprio Cloudflare pode ser o registrador
-   do domínio (preço de custo, sem markup).
-2. **GitHub Pages** — grátis, direto do mesmo repositório GitHub.
-3. **Netlify** — grátis, arrastar a pasta ou conectar ao GitHub.
+### Opção 1 — Cloudflare Pages (recomendado)
 
-Passo a passo:
+1. Criar um repositório no GitHub e enviar esta pasta (`git remote add origin ...`
+   e `git push`).
+2. Em [pages.cloudflare.com](https://pages.cloudflare.com), conectar esse
+   repositório — build command vazio, output directory `/` (raiz).
+3. Em **Custom domains**, adicionar `distribuidoraperesearaujo.com.br` e
+   `www.distribuidoraperesearaujo.com.br`.
+4. No painel do registro.br, apontar o DNS do domínio para a Cloudflare
+   (a própria Cloudflare Pages mostra os registros exatos — geralmente 2
+   registros `NS`, ou `CNAME`/`A` se preferir manter o DNS no registro.br).
 
-1. Registrar o domínio (ex.: `distribuidoraperes.com.br` no registro.br, ou uma
-   variação `.com`/`.com.br` disponível — é o único custo real desta opção).
-2. Criar um repositório no GitHub e enviar esta pasta.
-3. Conectar o repositório à Cloudflare Pages (ou Netlify/GitHub Pages).
-4. Apontar o DNS do domínio para a plataforma escolhida (instruções ficam
-   disponíveis na própria plataforma ao cadastrar o domínio).
+### Opção 2 — GitHub Pages
+
+1. Mesmo passo 1 acima (subir para um repositório GitHub).
+2. Nas configurações do repositório → **Pages** → escolher a branch `master`
+   e pasta raiz.
+3. Em **Custom domain**, informar `distribuidoraperesearaujo.com.br`.
+4. No registro.br, criar os registros DNS que o GitHub Pages indicar
+   (tipicamente `A` apontando para os IPs do GitHub Pages + um `CNAME` para
+   `www`).
+
+### Opção 3 — Netlify
+
+1. Arrastar esta pasta direto no painel da Netlify (ou conectar ao GitHub).
+2. Em **Domain settings**, adicionar `distribuidoraperesearaujo.com.br`.
+3. Apontar o DNS conforme instruções da Netlify.
+
+Em qualquer uma das três, o certificado HTTPS é emitido automaticamente e
+sem custo pela própria plataforma.
 
 ## Formulário de contato
 
@@ -57,6 +78,8 @@ site-dpa/
   segmentos.html        6 linhas de produto
   licitacoes.html        Como funciona, documentação, modalidades
   contato.html          Formulário + canais + mapa
+  robots.txt            Libera indexação, aponta para o sitemap
+  sitemap.xml            Lista as 5 páginas para os buscadores
   assets/
     css/style.css        Estilo único, responsivo (mobile/tablet/desktop)
     js/main.js            Menu mobile
