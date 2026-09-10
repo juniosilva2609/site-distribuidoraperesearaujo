@@ -262,7 +262,7 @@ footer{background:var(--cinza-900);color:#9aa4b2;padding:56px 0 20px;}
 .footer-grid a{display:block;color:#9aa4b2;font-size:14px;margin-bottom:10px;}
 .footer-grid a:hover{color:#fff;}
 .footer-marca{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
-.footer-marca img{height:36px;filter:brightness(0) invert(1);opacity:.92;}
+.footer-marca img{height:40px;}
 .footer-linha{border-top:1px solid #2a313c;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;}
 
 /* ---------- Página interna: hero simples ---------- */
