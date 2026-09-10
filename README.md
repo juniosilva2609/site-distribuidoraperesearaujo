@@ -22,7 +22,7 @@ Depois acesse `http://localhost:8000`.
 
 ## Domínio
 
-**Registrado:** `peresaraujo.com.br` (já refletido em todo o site:
+**Registrado:** `distribuidoraperesearaujo.com.br` (já refletido em todo o site:
 canonical, Open Graph, `robots.txt` e `sitemap.xml`).
 
 ## Como publicar (custo mínimo: só o domínio, já pago)
@@ -36,8 +36,8 @@ todas sem custo de servidor — escolha uma:
    e `git push`).
 2. Em [pages.cloudflare.com](https://pages.cloudflare.com), conectar esse
    repositório — build command vazio, output directory `/` (raiz).
-3. Em **Custom domains**, adicionar `peresaraujo.com.br` e
-   `www.peresaraujo.com.br`.
+3. Em **Custom domains**, adicionar `distribuidoraperesearaujo.com.br` e
+   `www.distribuidoraperesearaujo.com.br`.
 4. No painel do registro.br, apontar o DNS do domínio para a Cloudflare
    (a própria Cloudflare Pages mostra os registros exatos — geralmente 2
    registros `NS`, ou `CNAME`/`A` se preferir manter o DNS no registro.br).
@@ -47,7 +47,7 @@ todas sem custo de servidor — escolha uma:
 1. Mesmo passo 1 acima (subir para um repositório GitHub).
 2. Nas configurações do repositório → **Pages** → escolher a branch `master`
    e pasta raiz.
-3. Em **Custom domain**, informar `peresaraujo.com.br`.
+3. Em **Custom domain**, informar `distribuidoraperesearaujo.com.br`.
 4. No registro.br, criar os registros DNS que o GitHub Pages indicar
    (tipicamente `A` apontando para os IPs do GitHub Pages + um `CNAME` para
    `www`).
@@ -55,7 +55,7 @@ todas sem custo de servidor — escolha uma:
 ### Opção 3 — Netlify
 
 1. Arrastar esta pasta direto no painel da Netlify (ou conectar ao GitHub).
-2. Em **Domain settings**, adicionar `peresaraujo.com.br`.
+2. Em **Domain settings**, adicionar `distribuidoraperesearaujo.com.br`.
 3. Apontar o DNS conforme instruções da Netlify.
 
 Em qualquer uma das três, o certificado HTTPS é emitido automaticamente e
