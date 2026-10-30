@@ -94,6 +94,42 @@ nav.principal{
 .hamb{display:none;background:none;border:0;cursor:pointer;padding:8px;}
 .hamb span{display:block;width:24px;height:2px;background:var(--azul-900);margin:5px 0;}
 
+/* ---------- Seletor de WhatsApp (Leonardo / Júnio) ---------- */
+.wa-escolha{position:relative;display:inline-block;}
+.wa-escolha summary{list-style:none;cursor:pointer;user-select:none;}
+.wa-escolha summary::-webkit-details-marker{display:none;}
+.wa-escolha summary::after{
+  content:"";display:inline-block;width:7px;height:7px;margin-left:10px;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:rotate(45deg) translateY(-2px);transition:transform .15s;
+}
+.wa-escolha[open] summary::after{transform:rotate(-135deg) translateY(-1px);}
+.wa-escolha summary:focus-visible{outline:2px solid var(--azul-600);outline-offset:2px;}
+.wa-lista{
+  position:absolute;right:0;top:calc(100% + 8px);z-index:70;min-width:250px;
+  background:#fff;border:1px solid var(--cinza-300);border-radius:var(--raio);
+  box-shadow:var(--sombra);padding:8px;text-align:left;
+}
+.wa-escolha .wa-lista a{
+  display:flex;flex-direction:column;gap:2px;width:auto;padding:12px 14px;
+  border-radius:8px;color:var(--cinza-900);font-weight:400;font-size:13.5px;
+}
+.wa-escolha .wa-lista a:hover{background:var(--cinza-100);color:var(--cinza-900);}
+.wa-escolha .wa-lista strong{
+  display:flex;align-items:center;gap:8px;color:var(--azul-900);font-size:15px;
+}
+.wa-escolha .wa-lista strong::before{
+  content:"";width:8px;height:8px;border-radius:50%;background:#25D366;flex:0 0 8px;
+}
+.wa-escolha .wa-lista span{color:var(--cinza-500);padding-left:16px;}
+.wa-menu summary.cta{
+  display:inline-flex;align-items:center;margin-left:6px;padding:10px 16px;
+  background:var(--vermelho);color:#fff;border-radius:8px;
+  font-weight:600;font-size:14.5px;transition:.15s;
+}
+.wa-menu summary.cta:hover{background:var(--vermelho-dark);}
+.wa-btn .wa-lista{left:50%;right:auto;transform:translateX(-50%);}
+
 /* ---------- Hero ---------- */
 .hero{
   background:linear-gradient(120deg,var(--azul-900) 0%, var(--azul-700) 55%, var(--azul-600) 100%);
@@ -249,6 +285,7 @@ nav.principal{
 .canal .icone svg{width:20px;height:20px;stroke:#fff;fill:none;}
 .canal strong{display:block;color:var(--azul-900);font-size:14.5px;}
 .canal span,.canal a{font-size:14px;color:var(--cinza-700);}
+.canal a{display:block;}
 .canal a:hover{color:var(--vermelho);}
 
 /* ---------- Mapa ---------- */
@@ -295,6 +332,10 @@ footer{background:var(--cinza-900);color:#9aa4b2;padding:56px 0 20px;}
   }
   .menu.aberto{transform:translateX(0);}
   .menu a{width:100%;padding:14px 10px;}
+  .menu .wa-escolha{width:100%;}
+  .wa-menu summary.cta{display:flex;justify-content:space-between;margin-left:0;padding:14px 16px;}
+  .wa-menu .wa-lista{position:static;margin-top:8px;box-shadow:none;min-width:0;}
+  .wa-btn .wa-lista{left:50%;min-width:230px;}
   .hamb{display:block;}
   .grid-3{grid-template-columns:1fr;}
   .passos{grid-template-columns:1fr;}
