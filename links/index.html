@@ -87,6 +87,8 @@
   }
   .seal .sep{opacity:.45}
   .seal.festa{border-color:rgba(255,45,51,.6);box-shadow:0 0 24px -4px rgba(215,20,26,.7)}
+  .dica{font-size:12.5px;line-height:1.55;color:var(--muted);text-align:center;padding:10px 14px;border-radius:14px;border:1px solid rgba(215,20,26,.45);background:rgba(215,20,26,.08)}
+  .dica b{color:var(--text);font-weight:600}
   .seal i{width:6px;height:6px;border-radius:50%;background:var(--red-2);box-shadow:0 0 10px var(--red-2)}
 
   .links{width:100%;margin-top:28px;display:flex;flex-direction:column;gap:12px}
@@ -198,11 +200,12 @@
         <span class="txt"><b>Site oficial</b><span>distribuidoraperesearaujo.com.br</span></span>
         <span class="go"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
       </a>
-          <a class="btn in" style="animation-delay:.70s" href="contato.vcf" download="Distribuidora Peres e Araujo.vcf">
+          <a class="btn in" id="salvar" style="animation-delay:.70s" href="contato.vcf">
         <span class="ic alt"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M7.5 17.5c.9-2 2.6-3 4.5-3s3.6 1 4.5 3"/></svg></span>
         <span class="txt"><b>Salvar contato</b><span>Adicione a DPA à sua agenda</span></span>
         <span class="go"><svg viewBox="0 0 24 24"><path d="M12 5v12M6 12l6 6 6-6"/></svg></span>
       </a>
+      <p class="dica" id="dica" hidden>No navegador do Instagram não dá para salvar contatos. Toque em <b>⋯</b> no canto superior direito, escolha <b>Abrir no navegador externo</b> e toque em <b>Salvar contato</b> de novo.</p>
     </nav>
 
     <div class="chips in" style="animation-delay:.78s" aria-label="Segmentos">
@@ -223,6 +226,25 @@
   el.textContent=n+' anos';
   // mês do aniversário: selo em destaque
   if(h.getMonth()===0) el.parentNode.classList.add('festa');
+})();
+</script>
+<script>
+/* Navegadores internos (Instagram, Facebook etc.) não abrem arquivos .vcf */
+(function(){
+  var a=document.getElementById('salvar'); if(!a) return;
+  var ua=navigator.userAgent||'';
+  if(!/Instagram|FBAN|FBAV|FB_IAB|FBIOS|Line\/|TikTok|musical_ly|Bytedance/i.test(ua)) return;
+  var vcf='https://distribuidoraperesearaujo.com.br/links/contato.vcf';
+  if(/Android/i.test(ua)){
+    // abre o arquivo no navegador padrão do Android, que entrega à agenda
+    a.href='intent://distribuidoraperesearaujo.com.br/links/contato.vcf#Intent;scheme=https;action=android.intent.action.VIEW;S.browser_fallback_url='+encodeURIComponent(vcf)+';end';
+    return;
+  }
+  // iPhone: não há como sair do Instagram automaticamente; mostra a instrução
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var d=document.getElementById('dica'); if(d){d.hidden=false; d.scrollIntoView({behavior:'smooth',block:'center'});}
+  });
 })();
 </script>
 </body>
