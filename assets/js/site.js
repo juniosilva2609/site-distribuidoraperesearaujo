@@ -87,5 +87,45 @@
         });
       });
     });
+
+    /* Contato: monta a mensagem e abre no WhatsApp do sócio escolhido ou no e-mail */
+    var form = document.getElementById("form-contato");
+    if (form) {
+      var via = "whatsapp";
+      form.querySelectorAll("button[data-via]").forEach(function (b) {
+        b.addEventListener("click", function () { via = b.getAttribute("data-via"); });
+      });
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var erro = document.getElementById("form-erro");
+        var v = function (id) { return (form.querySelector("#" + id).value || "").trim(); };
+        var falta = [];
+        if (!v("nome")) falta.push("seu nome");
+        if (!v("mensagem")) falta.push("a mensagem");
+        if (falta.length) {
+          erro.textContent = "Preencha " + falta.join(" e ") + " para enviar.";
+          erro.hidden = false;
+          form.querySelector(!v("nome") ? "#nome" : "#mensagem").focus();
+          return;
+        }
+        erro.hidden = true;
+        var linhas = ["Olá, tudo bem? Acessei o site da Distribuidora Peres & Araújo.", "",
+          "Nome: " + v("nome")];
+        if (v("orgao")) linhas.push("Órgão/Empresa: " + v("orgao"));
+        if (v("email")) linhas.push("E-mail: " + v("email"));
+        if (v("telefone")) linhas.push("Telefone: " + v("telefone"));
+        linhas.push("Assunto: " + v("assunto"), "", v("mensagem"));
+        var texto = linhas.join("\n");
+        if (via === "email") {
+          location.href = "mailto:distribuidora.peres@hotmail.com?subject=" +
+            encodeURIComponent("Contato pelo site: " + v("assunto")) + "&body=" + encodeURIComponent(texto);
+        } else {
+          var socio = form.querySelector("input[name=socio]:checked").value;
+          var url = "https://wa.me/" + socio + "?text=" + encodeURIComponent(texto);
+          var w = window.open(url, "_blank");
+          if (w) w.opener = null; else location.href = url;
+        }
+      });
+    }
   });
 })();

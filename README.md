@@ -76,11 +76,9 @@ sem custo pela própria plataforma.
 
 ## Formulário de contato
 
-O formulário da página `contato.html` usa o serviço gratuito **FormSubmit**
-(sem necessidade de conta ou backend próprio). **No primeiro envio real**, o
-FormSubmit manda um e-mail de confirmação para `distribuidora.peres@hotmail.com`
-pedindo para ativar o recebimento — é preciso abrir esse e-mail e confirmar uma
-única vez, senão as mensagens seguintes não chegam.
+O formulário da página `/contato/` não usa serviço externo: ele monta a mensagem com os dados
+preenchidos e abre pronta no WhatsApp do sócio escolhido (Leonardo ou Júnio) ou no e-mail
+`distribuidora.peres@hotmail.com`. Nada precisa ser configurado ou confirmado.
 
 ## Estrutura
 
