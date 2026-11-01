@@ -1,0 +1,43 @@
+# Regera o site todo dia às 00:07 (Brasília) e publica se algo mudou.
+# Garante, sem depender de ninguém, a troca automática do período de 12 anos
+# (08/01/2027 → logo, faixa, post e og.jpg comemorativos; 01/02/2027 → volta ao padrão),
+# a contagem de anos e a publicação de novidades com data agendada.
+name: Atualizar site
+
+on:
+  schedule:
+    - cron: "7 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validar novidades
+        run: python3 build.py --check
+      - name: Gerar site
+        run: python3 build.py
+      - name: Publicar se mudou
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "dpa-site-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Atualizacao automatica do site ($(TZ=America/Sao_Paulo date +%d/%m/%Y))"
+            git push origin HEAD:master
+          else
+            echo "Nada mudou."
+          fi

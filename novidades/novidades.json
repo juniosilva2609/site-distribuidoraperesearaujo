@@ -1,0 +1,43 @@
+[
+  {
+    "id": "dpa-completa-12-anos",
+    "data": "2027-01-08",
+    "categoria": "DPA",
+    "titulo": "DPA completa 12 anos",
+    "resumo": "Em 8 de janeiro de 2027 a Distribuidora Peres & Araújo completa 12 anos fornecendo para o setor público. Agradecemos a cada órgão, parceiro e colaborador que fez parte dessa história desde 2015. Acompanhe a comemoração no nosso Instagram.",
+    "fonte": "Instagram @distribuidoraperesearaujo",
+    "url": "https://www.instagram.com/distribuidoraperesearaujo",
+    "tag": "2015 → 2027",
+    "botao": "Ver no Instagram ↗"
+  },
+  {
+    "id": "tcu-aliquota-referencia-cbs-11-3",
+    "data": "2026-10-28",
+    "categoria": "Reforma Tributária",
+    "titulo": "TCU calcula alíquota de referência de 11,3% para a CBS",
+    "resumo": "O Tribunal de Contas da União aprovou o cálculo da alíquota de referência de 11,3% para a CBS, o tributo federal que substitui o PIS e a Cofins a partir de 2027. O TCU também calculou um redutor de 44,2% da CBS para certas compras feitas pela administração pública direta, autarquias e fundações. O resultado segue para o Senado Federal, que fixará a alíquota por resolução.",
+    "fonte": "Tribunal de Contas da União (TCU)",
+    "url": "https://portal.tcu.gov.br/imprensa/noticias/tcu-calcula-aliquota-de-referencia-de-113-para-novo-tributo-sobre-consumo",
+    "tag": "LC 214/2025"
+  },
+  {
+    "id": "receita-86-documentos-fiscais-destacam-cbs",
+    "data": "2026-10-09",
+    "categoria": "Reforma Tributária",
+    "titulo": "86% dos documentos fiscais de empresas obrigadas já destacam a CBS",
+    "resumo": "Segundo a Receita Federal, cerca de 86% dos documentos fiscais emitidos nos últimos 30 dias pelas empresas obrigadas já trazem o destaque da CBS. Na NF-e, usada nas vendas entre empresas, o índice é de 78%. As empresas do Simples Nacional não precisam destacar a CBS em 2026, e a cobrança da CBS começa em 2027.",
+    "fonte": "Receita Federal",
+    "url": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/reforma-tributaria-86-dos-documentos-fiscais-de-empresas-obrigadas-ja-trazem-destaque-da-cbs",
+    "tag": "CBS na NF-e"
+  },
+  {
+    "id": "compras-gov-processos-no-aplicativo",
+    "data": "2026-09-24",
+    "categoria": "Licitações",
+    "titulo": "Processos de contratação agora também no aplicativo do Compras.gov.br",
+    "resumo": "O Ministério da Gestão e da Inovação em Serviços Públicos informou que os processos de contratação passam a ser publicados também no aplicativo do Compras.gov.br. Os fornecedores podem receber avisos quando surgir uma oportunidade no seu ramo e acompanhar os processos pelo celular. As publicações no PNCP e no Diário Oficial da União continuam normalmente.",
+    "fonte": "Portal de Compras do Governo Federal (MGI)",
+    "url": "https://www.gov.br/compras/pt-br/acesso-a-informacao/comunicados/2026/no-40-26-processos-de-contratacao-publicados-tambem-no-aplicativo-do-compras-gov.br",
+    "tag": "Comunicado nº 40/26"
+  }
+]

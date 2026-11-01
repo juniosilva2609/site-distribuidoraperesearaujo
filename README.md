@@ -1,21 +1,34 @@
 # Site institucional — Distribuidora Peres & Araújo
 
-Site estático (HTML/CSS/JS puro, sem build, sem dependências pagas) com 5 páginas:
-`index.html` (Home), `sobre.html`, `segmentos.html`, `licitacoes.html`, `contato.html`.
+Site estático (HTML/CSS/JS puro, sem dependências pagas), publicado pelo **GitHub Pages**
+a partir da branch `master`, no domínio `distribuidoraperesearaujo.com.br`.
 
-Conteúdo montado a partir de dados reais da empresa: contrato social consolidado
-(objeto social, CNPJ, data de fundação, sede) e amostra de notas fiscais de saída
-de 2026 (segmentos de produtos e órgãos públicos atendidos). A logo usada é a
-versão "Logo 2026 comemorativa 11 anos" fornecida pelo proprietário.
+As páginas são **geradas** pelo `build.py` (Python 3, sem bibliotecas externas) a partir de:
+
+- `_src/pages/*.html` — conteúdo de cada página (Home, Quem somos, Segmentos, Como atendemos, Contato);
+- `novidades/novidades.json` — notícias da aba Novidades (uma entrada por notícia).
+
+**Não edite à mão** `index.html`, `sobre/`, `segmentos/`, `como-atendemos/`, `contato/`, `novidades/index.html`,
+`novidades/feed.xml`, `sitemap.xml`, `404.html` nem os redirecionamentos `*.html` — edite as fontes e rode
+`python3 build.py`. A página `/links/` é a exceção: é mantida à mão em `links/index.html`.
+
+### Publicar uma notícia
+Veja `ROTINA-NOVIDADES.md`. Resumo: acrescentar o registro no JSON → `python3 build.py --check` →
+`python3 build.py` → commit e push no `master`.
+
+### 12 anos (08/01/2027 a 31/01/2027)
+Programado por data, sem depender de ninguém: logo comemorativa no header e na `/links/`, faixa na home,
+post "DPA completa 12 anos" e `og.jpg` comemorativa. Em 01/02/2027 tudo volta ao padrão. O JavaScript faz a
+troca visual na hora exata e o workflow `.github/workflows/atualizar-site.yml` (diário, 00:07) regera o site
+e troca a `og.jpg`. Para testar: `DPA_HOJE=2027-01-10 python3 build.py` (depois rode `python3 build.py` de novo).
 
 ## Como ver localmente
 
-Não precisa de servidor — pode abrir `index.html` direto no navegador. Ou, se
-preferir servir por HTTP (recomendado para testar o formulário/links relativos):
+Os links usam caminhos absolutos (`/assets/...`), então sirva por HTTP:
 
 ```bash
-cd site-dpa
-python -m http.server 8000
+python3 build.py
+python3 -m http.server 8000
 ```
 
 Depois acesse `http://localhost:8000`.
@@ -72,27 +85,17 @@ pedindo para ativar o recebimento — é preciso abrir esse e-mail e confirmar u
 ## Estrutura
 
 ```
-site-dpa/
-  index.html          Home
-  sobre.html           Sobre / dados formais / diferenciais
-  segmentos.html        6 linhas de produto
-  licitacoes.html        Como funciona, documentação, modalidades
-  contato.html          Formulário + canais + mapa
-  robots.txt            Libera indexação, aponta para o sitemap
-  sitemap.xml            Lista as 5 páginas para os buscadores
-  assets/
-    css/style.css        Estilo único, responsivo (mobile/tablet/desktop)
-    js/main.js            Menu mobile
-    img/
-      logo-full.png        Logo completa (fundo transparente) — não usada nas páginas, guardada para uso futuro (ex. materiais impressos)
-      mark.png              Ícone/globo recortado da logo, usado no cabeçalho e rodapé
-      favicon-*.png, favicon.ico  Ícones de aba gerados a partir da logo
+build.py                 Gerador do site (valida e gera as páginas)
+_src/pages/              Conteúdo das páginas (não publicado; o Jekyll do GitHub Pages ignora pastas com "_")
+novidades/novidades.json Notícias
+links/                   Página de links (index.html, og.jpg, contato.vcf)
+assets/css/site.css      Estilo único (identidade grafite e vermelho, Anton + Montserrat)
+assets/js/site.js        Menu, seletor de WhatsApp, animações, contagem de anos, período de 12 anos, filtro
+assets/fonts/            Anton e Montserrat (woff2, hospedadas no site)
+assets/img/              Logo (WebP), favicons, og-padrao.jpg, mosaico do Instagram, glifo oficial do Instagram
+assets/img/12anos/       Logos oficiais de 12 anos e og-12anos.jpg
+.github/workflows/       Regeração diária automática
 ```
 
-## Atualizar conteúdo depois
-
-Não há CMS nem editor visual — qualquer alteração de texto é feita direto no
-HTML (procure o texto e edite). Isso é o principal trade-off da Opção B frente
-ao Wix: mais controle e performance, porém sem editor "arrastar e soltar" para
-quem não conhece código. Se isso virar um problema no dia a dia, dá pra
-adicionar um CMS simples por cima depois sem refazer o site.
+O glifo do Instagram (`assets/img/instagram-glyph-branco.svg`) é o arquivo oficial do Meta Brand Resources
+(versão branca), usado sem alterações de forma ou cor.

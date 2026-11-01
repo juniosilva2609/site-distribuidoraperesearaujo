@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Novidades — Distribuidora Peres &amp; Araújo</title>
+  <link>https://distribuidoraperesearaujo.com.br/novidades/</link>
+  <atom:link href="https://distribuidoraperesearaujo.com.br/novidades/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Licitações, reforma tributária e notícias da DPA, com link para a fonte oficial.</description>
+  <language>pt-BR</language>
+  <lastBuildDate>Wed, 28 Oct 2026 09:00:00 -0300</lastBuildDate>
+  <item>
+    <title>TCU calcula alíquota de referência de 11,3% para a CBS</title>
+    <link>https://distribuidoraperesearaujo.com.br/novidades/#tcu-aliquota-referencia-cbs-11-3</link>
+    <guid isPermaLink="false">dpa-novidade-tcu-aliquota-referencia-cbs-11-3</guid>
+    <pubDate>Wed, 28 Oct 2026 09:00:00 -0300</pubDate>
+    <category>Reforma Tributária</category>
+    <description>O Tribunal de Contas da União aprovou o cálculo da alíquota de referência de 11,3% para a CBS, o tributo federal que substitui o PIS e a Cofins a partir de 2027. O TCU também calculou um redutor de 44,2% da CBS para certas compras feitas pela administração pública direta, autarquias e fundações. O resultado segue para o Senado Federal, que fixará a alíquota por resolução. Fonte: Tribunal de Contas da União (TCU) — https://portal.tcu.gov.br/imprensa/noticias/tcu-calcula-aliquota-de-referencia-de-113-para-novo-tributo-sobre-consumo</description>
+  </item>
+  <item>
+    <title>86% dos documentos fiscais de empresas obrigadas já destacam a CBS</title>
+    <link>https://distribuidoraperesearaujo.com.br/novidades/#receita-86-documentos-fiscais-destacam-cbs</link>
+    <guid isPermaLink="false">dpa-novidade-receita-86-documentos-fiscais-destacam-cbs</guid>
+    <pubDate>Fri, 09 Oct 2026 09:00:00 -0300</pubDate>
+    <category>Reforma Tributária</category>
+    <description>Segundo a Receita Federal, cerca de 86% dos documentos fiscais emitidos nos últimos 30 dias pelas empresas obrigadas já trazem o destaque da CBS. Na NF-e, usada nas vendas entre empresas, o índice é de 78%. As empresas do Simples Nacional não precisam destacar a CBS em 2026, e a cobrança da CBS começa em 2027. Fonte: Receita Federal — https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/reforma-tributaria-86-dos-documentos-fiscais-de-empresas-obrigadas-ja-trazem-destaque-da-cbs</description>
+  </item>
+  <item>
+    <title>Processos de contratação agora também no aplicativo do Compras.gov.br</title>
+    <link>https://distribuidoraperesearaujo.com.br/novidades/#compras-gov-processos-no-aplicativo</link>
+    <guid isPermaLink="false">dpa-novidade-compras-gov-processos-no-aplicativo</guid>
+    <pubDate>Thu, 24 Sep 2026 09:00:00 -0300</pubDate>
+    <category>Licitações</category>
+    <description>O Ministério da Gestão e da Inovação em Serviços Públicos informou que os processos de contratação passam a ser publicados também no aplicativo do Compras.gov.br. Os fornecedores podem receber avisos quando surgir uma oportunidade no seu ramo e acompanhar os processos pelo celular. As publicações no PNCP e no Diário Oficial da União continuam normalmente. Fonte: Portal de Compras do Governo Federal (MGI) — https://www.gov.br/compras/pt-br/acesso-a-informacao/comunicados/2026/no-40-26-processos-de-contratacao-publicados-tambem-no-aplicativo-do-compras-gov.br</description>
+  </item>
+</channel>
+</rss>
