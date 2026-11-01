@@ -25,7 +25,7 @@ from urllib.parse import quote, urlparse
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://distribuidoraperesearaujo.com.br"
 IG_URL = "https://www.instagram.com/distribuidoraperesearaujo"
-MSG_WA = ("Olá, tudo bem? Acessei o instagram da Distribuidora Peres & Araújo e gostaria de receber "
+MSG_WA = ("Olá, tudo bem? Acessei o site da Distribuidora Peres & Araújo e gostaria de receber "
           "mais informações sobre produtos e condições de fornecimento. Desde já, agradeço.")
 SOCIOS = [("Leonardo", "5531997186304", "(31) 99718-6304"), ("Júnio", "5531998902018", "(31) 99890-2018")]
 CATEGORIAS = {"Licitações": "licitacoes", "Reforma Tributária": "reforma", "DPA": "dpa"}
