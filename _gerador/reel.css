@@ -1,0 +1,23 @@
+.cena{position:absolute;inset:0;opacity:0;animation:cena var(--dur) linear var(--s) both paused}
+@keyframes cena{0%{opacity:0}3%{opacity:1}96%{opacity:1}100%{opacity:0}}
+.cena.ult{animation-name:cenaf}@keyframes cenaf{0%{opacity:0}3%{opacity:1}100%{opacity:1}}
+.an{animation:sobe .7s cubic-bezier(.2,.8,.2,1) calc(var(--s) + var(--d,0s)) both paused}
+@keyframes sobe{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+.zoom{animation:zoom .6s cubic-bezier(.2,1.3,.3,1) calc(var(--s) + var(--d,0s)) both paused}
+@keyframes zoom{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+.esq{animation:esq .7s cubic-bezier(.2,.8,.2,1) calc(var(--s) + var(--d,0s)) both paused}
+@keyframes esq{from{opacity:0;transform:translateX(-120px)}to{opacity:1;transform:none}}
+.barra{transform-origin:left;animation:barra .8s cubic-bezier(.2,.8,.2,1) calc(var(--s) + var(--d,0s)) both paused}
+@keyframes barra{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.fundo{position:absolute;inset:0;background:linear-gradient(180deg,#111216,#1e1f26)}
+.brilho{position:absolute;right:-40%;bottom:-20%;width:140%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(215,20,26,.5),rgba(215,20,26,0) 62%);animation:pulsa 4s ease-in-out 0s infinite alternate paused}
+@keyframes pulsa{from{transform:scale(.85) translate(0,0)}to{transform:scale(1.15) translate(-8%,-6%)}}
+.gl{position:absolute;right:-22%;bottom:4%;width:95%;opacity:.07;filter:grayscale(1);animation:gira 40s linear 0s infinite paused}
+@keyframes gira{from{transform:rotate(-6deg) scale(1)}to{transform:rotate(6deg) scale(1.12)}}
+.prog{position:absolute;left:0;top:0;height:10px;background:#d7141a;width:100%;transform-origin:left;animation:barra var(--total) linear 0s both paused;z-index:9}
+.r{position:absolute;inset:0;padding:210px 90px 330px;display:flex;flex-direction:column;justify-content:center}
+.r h1{font-size:118px;line-height:1.08}.r h2{font-size:84px}.r p{font-size:50px}
+.r .k{font-size:36px}.r .num{font-size:420px}
+.marca{position:absolute;left:90px;top:110px;display:flex;align-items:center;gap:18px;font-weight:600;font-size:26px;letter-spacing:.34em;color:#c4c7cf;z-index:8}
+.marca img{width:66px}
+.arroba{position:absolute;left:0;right:0;bottom:250px;text-align:center;font-weight:600;font-size:34px;color:#c4c7cf;z-index:8}
