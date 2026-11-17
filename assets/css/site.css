@@ -329,7 +329,7 @@ h2 em,h1 em{font-style:normal;color:var(--red)}
   .doc-grid{grid-template-columns:1fr}
   .campo-dupla,.socios,.form-botoes{grid-template-columns:1fr}
 }
-@media (max-width:900px){
+@media (max-width:1100px){
   .hamb{display:flex;flex-direction:column}
   .menu{position:fixed;left:0;right:0;top:var(--header-h);height:calc(100vh - var(--header-h));height:calc(100dvh - var(--header-h));z-index:81;margin:0;flex-direction:column;align-items:stretch;gap:4px;padding:18px 20px 32px;background:var(--bg);border-top:1px solid var(--line);overflow-y:auto;opacity:0;transform:translateY(-10px);visibility:hidden;transition:opacity .25s ease,transform .25s ease,visibility .25s}
   .menu-aberto .menu{opacity:1;transform:none;visibility:visible}

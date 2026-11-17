@@ -92,6 +92,8 @@ assets/js/site.js        Menu, seletor de WhatsApp, animações, contagem de ano
 assets/fonts/            Anton e Montserrat (woff2, hospedadas no site)
 assets/img/              Logo (WebP), favicons, og-padrao.jpg, mosaico do Instagram, glifo oficial do Instagram
 assets/img/12anos/       Logos oficiais de 12 anos e og-12anos.jpg
+assets/img/marca/        Kit de marca: capa, logotipo e fotos do Perfil da Empresa no Google; capas de destaques do Instagram
+_src/marca/gerar_marca.py Gera o kit de marca (Playwright + Chrome)
 .github/workflows/       Regeração diária automática
 ```
 
