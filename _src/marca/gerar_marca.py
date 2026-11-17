@@ -102,7 +102,7 @@ SEGMENTOS = [
      "Notebooks, computadores, monitores, impressoras, HDs, componentes e suprimentos."),
     ("seg-eletrodomesticos", "fridge", "Eletrodomésticos<br>&amp; Refrigeração",
      "Geladeiras, freezers, micro-ondas, cafeteiras, purificadores e bebedouros."),
-    ("seg-climatizacao", "snow", "Climati&shy;zação",
+    ("seg-climatizacao", "snow", "Climatização",
      "Ar-condicionado split e portátil de diversas capacidades, de 9 mil a 24 mil BTUs ou mais."),
     ("seg-ferramentas", "tool", "Ferramentas<br>&amp; Equipamentos",
      "Esmerilhadeiras, furadeiras, martelos demolidores, roçadeiras, máquinas de solda e bombas."),
@@ -111,7 +111,7 @@ SEGMENTOS = [
 ]
 
 FOTO_CSS = """
-.globo{width:1100px;height:1100px;right:-330px;top:-260px}
+.globo{width:1300px;height:1300px;right:-420px;top:-200px}
 .cab{position:absolute;left:84px;top:70px;height:74px}
 .rod{height:96px;padding:0 84px;font-size:21px;white-space:nowrap;font-weight:600;color:#C9CCD3}
 .rod b{color:#fff}
@@ -119,61 +119,61 @@ FOTO_CSS = """
 """
 
 def foto_segmento(slug, icone, titulo, texto, n):
-    W, H = 1200, 900
+    W, H = 1200, 1200
     extra = FOTO_CSS + """
-    .ico{position:absolute;right:92px;top:208px;width:330px;height:330px;border-radius:50%;display:grid;place-items:center;
+    .ico{position:absolute;left:84px;top:230px;width:300px;height:300px;border-radius:50%;display:grid;place-items:center;
          background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1.5px solid rgba(255,90,95,.45);
          box-shadow:0 0 0 18px rgba(215,20,26,.06),0 40px 80px -30px rgba(0,0,0,.8)}
-    .txt{position:absolute;left:84px;top:236px;width:640px}
+    .txt{position:absolute;left:84px;top:600px;width:1030px}
     .eyebrow{font-size:21px;margin-bottom:22px}
-    h1{font-size:92px;margin-bottom:28px}
-    p{font-size:27px;line-height:1.45;color:#B9BDC6;margin-top:26px}
+    h1{font-size:104px;margin-bottom:28px}
+    p{font-size:30px;line-height:1.45;color:#B9BDC6;margin-top:28px;max-width:960px}
     """
     corpo = GLOBO + FAIXAS + """<img class="cab" src="%s/logo.png">
     <div class="ico">%s</div>
     <div class="txt"><div class="eyebrow">Linha de fornecimento · %02d</div><h1 class="disp">%s</h1><span class="linha"></span><p>%s</p></div>
     <div class="rod"><span>Fornecimento para <b>órgãos públicos</b> desde 2015</span><span>distribuidoraperesearaujo.com.br</span></div>""" % (
-        IMG, ic(icone, 170, "#fff", 1.25), n, titulo, texto)
-    return "google/%s.jpg" % slug, W, H, pagina(W, H, corpo, extra, fx=300)
+        IMG, ic(icone, 150, "#fff", 1.25), n, titulo, texto)
+    return "google/foto-%s.jpg" % slug, W, H, pagina(W, H, corpo, extra, fx=300)
 
 PASSOS = [("Edital e cotação", "Recebemos o edital, item ou TR"), ("Proposta", "Especificação, marca e valor"),
           ("Empenho / AF", "Prazo e garantia confirmados"), ("Entrega", "No endereço, dentro do prazo"),
           ("NF-e e suporte", "Acompanhamento até o recebimento")]
 
 def foto_processo():
-    W, H = 1200, 900
+    W, H = 1200, 1200
     itens = "".join('<li><span class="n">%d</span><div><b>%s</b><small>%s</small></div></li>' % (i, t, s)
                     for i, (t, s) in enumerate(PASSOS, 1))
     extra = FOTO_CSS + """
-    .txt{position:absolute;left:84px;top:206px;right:84px}
+    .txt{position:absolute;left:84px;top:200px;right:84px}
     .eyebrow{font-size:21px;margin-bottom:20px}
-    h1{font-size:78px}
-    ol{list-style:none;position:absolute;left:84px;right:84px;top:440px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
-    ol:before{content:"";position:absolute;left:40px;right:120px;top:39px;height:2px;background:linear-gradient(90deg,#D7141A,rgba(215,20,26,.25))}
-    li{position:relative}
-    .n{display:grid;place-items:center;width:80px;height:80px;border-radius:50%;background:#15171B;border:2px solid #D7141A;font-family:Anton;font-size:38px;color:#fff;position:relative;z-index:1}
-    li b{display:block;font-size:24px;margin:26px 0 8px;color:#fff;line-height:1.2}
-    li small{display:block;font-size:19px;color:#A3A8B3;line-height:1.4}
+    h1{font-size:96px}
+    ol{list-style:none;position:absolute;left:84px;right:84px;top:430px;display:grid;gap:44px}
+    ol:before{content:"";position:absolute;left:39px;top:40px;bottom:40px;width:2px;background:linear-gradient(180deg,#D7141A,rgba(215,20,26,.25))}
+    li{position:relative;display:flex;align-items:center;gap:30px}
+    .n{display:grid;place-items:center;width:84px;height:84px;flex:0 0 84px;border-radius:50%;background:#15171B;border:2px solid #D7141A;font-family:Anton;font-size:38px;color:#fff;position:relative;z-index:1}
+    li b{display:block;font-size:35px;margin:0 0 4px;color:#fff;line-height:1.2}
+    li small{display:block;font-size:26px;color:#A3A8B3;line-height:1.4}
     """
     corpo = GLOBO + FAIXAS + """<img class="cab" src="%s/logo.png">
     <div class="txt"><div class="eyebrow">Como atendemos</div><h1 class="disp">Do edital à entrega</h1></div>
     <ol>%s</ol>
     <div class="rod"><span>Pregão · Dispensa · Registro de Preços · <b>Adesão a ARP</b></span><span>distribuidoraperesearaujo.com.br</span></div>""" % (IMG, itens)
-    return "google/como-atendemos.jpg", W, H, pagina(W, H, corpo, extra, fx=300)
+    return "google/foto-como-atendemos.jpg", W, H, pagina(W, H, corpo, extra, fx=300)
 
 ORGAOS = ["PMMG", "Polícia Civil MG", "DER-MG", "EPAMIG", "IEF-MG", "TCE-MG", "FHEMIG", "SEJUSP-MG",
           "Prefeituras", "Câmaras", "Universidades", "Autarquias"]
 
 def foto_orgaos():
-    W, H = 1200, 900
+    W, H = 1200, 1200
     tags = "".join("<span>%s</span>" % o for o in ORGAOS)
     extra = FOTO_CSS + """
     .txt{position:absolute;left:84px;top:206px;right:84px}
     .eyebrow{font-size:21px;margin-bottom:20px}
-    h1{font-size:78px;margin-bottom:12px}
+    h1{font-size:96px;margin-bottom:14px}
     .sub{font-size:25px;color:#B9BDC6}
-    .tags{position:absolute;left:84px;right:84px;top:470px;display:flex;flex-wrap:wrap;gap:16px}
-    .tags span{padding:16px 26px;border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font-size:25px;font-weight:600;color:#ECEDF0}
+    .tags{position:absolute;left:84px;right:84px;top:470px;display:flex;flex-wrap:wrap;gap:20px}
+    .tags span{padding:24px 34px;border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font-size:33px;font-weight:600;color:#ECEDF0}
     .num{position:absolute;right:92px;top:200px;text-align:right}
     .num b{font-family:Anton;font-size:120px;line-height:1;color:#fff;display:block}
     .num small{font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:#FF5A5F;font-weight:700}
@@ -182,7 +182,7 @@ def foto_orgaos():
     <div class="txt"><div class="eyebrow">Quem já confia na DPA</div><h1 class="disp">Órgãos atendidos</h1><div class="sub">Minas Gerais, Rio de Janeiro, Bahia, Sergipe e Paraíba</div></div>
     <div class="tags">%s</div>
     <div class="rod"><span>Documentação sempre regular · <b>certidões em dia</b></span><span>distribuidoraperesearaujo.com.br</span></div>""" % (IMG, tags)
-    return "google/orgaos-atendidos.jpg", W, H, pagina(W, H, corpo, extra, fx=300)
+    return "google/foto-orgaos-atendidos.jpg", W, H, pagina(W, H, corpo, extra, fx=300)
 
 # ---------- Instagram: capas de destaques 9:16 ----------
 DESTAQUES = [("quem-somos", "mark"), ("segmentos", "grid"), ("como-atendemos", "check"),
