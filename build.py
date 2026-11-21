@@ -8,7 +8,7 @@ Uso:
 Variável opcional DPA_HOJE=AAAA-MM-DD simula outra data (testes do período de 12 anos).
 
 Fontes:   _src/pages/*.html (conteúdo das páginas) e novidades/novidades.json (notícias).
-Geradas:  index.html, sobre/, segmentos/, como-atendemos/, contato/, privacidade/, novidades/ (+ feed.xml),
+Geradas:  index.html, sobre/, segmentos/, como-atendemos/, consultoria/, contato/, privacidade/, novidades/ (+ feed.xml),
           404.html, sitemap.xml, páginas antigas *.html (redirecionamento) e a og.jpg do período.
 Não edite as páginas geradas à mão: edite _src/ ou o JSON e rode o build.
 A página /links/ é mantida à parte (links/index.html) e não é gerada aqui.
@@ -27,6 +27,8 @@ SITE = "https://distribuidoraperesearaujo.com.br"
 IG_URL = "https://www.instagram.com/distribuidoraperesearaujo"
 MSG_WA = ("Olá, tudo bem? Acessei o site da Distribuidora Peres & Araújo e gostaria de receber "
           "mais informações sobre produtos e condições de fornecimento. Desde já, agradeço.")
+MSG_WA_CONS = ("Olá, tudo bem? Acessei o site da Distribuidora Peres & Araújo e gostaria de conversar sobre a "
+               "consultoria e gestão em licitações para a minha empresa.")
 SOCIOS = [("Leonardo", "5531997186304", "(31) 99718-6304"), ("Júnio", "5531998902018", "(31) 99890-2018")]
 CATEGORIAS = {"Licitações": "licitacoes", "Reforma Tributária": "reforma", "DPA": "dpa"}
 FUNDACAO = dt.date(2015, 1, 8)
@@ -59,8 +61,8 @@ ANOS = HOJE.year - FUNDACAO.year - (1 if (HOJE.month, HOJE.day) < (FUNDACAO.mont
 e = html.escape
 
 
-def wa_link(numero):
-    return "https://wa.me/%s?text=%s" % (numero, quote(MSG_WA, safe="-_.!~*'()"))
+def wa_link(numero, msg=None):
+    return "https://wa.me/%s?text=%s" % (numero, quote(msg or MSG_WA, safe="-_.!~*'()"))
 
 
 def data_br(d):
@@ -84,17 +86,17 @@ WA_ICON = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8.5 8.
            '<path d="M9 8.6c.2-.4.5-.4.8-.4h.4c.2 0 .4.1.5.4l.6 1.4c.1.2 0 .5-.1.7l-.5.6c.6 1.1 1.4 1.9 2.5 2.5l.6-.5c.2-.2.5-.2.7-.1l1.4.6c.3.1.4.3.4.5v.4c0 .3-.1.6-.4.8-.5.4-1.2.6-1.9.4A8.4 8.4 0 0 1 8.6 10.5c-.2-.7 0-1.4.4-1.9Z"/></svg>')
 
 
-def wa_lista(titulo="Escolha com quem falar"):
+def wa_lista(titulo="Escolha com quem falar", msg=None):
     itens = "".join(
         '<a href="%s" target="_blank" rel="noopener"><span class="av">%s</span><span><strong>%s</strong>'
-        '<small>Sócio-fundador · %s</small></span></a>' % (e(wa_link(n)), WA_ICON, nome, tel)
+        '<small>Sócio-fundador · %s</small></span></a>' % (e(wa_link(n, msg)), WA_ICON, nome, tel)
         for nome, n, tel in SOCIOS)
     return '<div class="wa-lista"><div class="tit">%s</div>%s</div>' % (titulo, itens)
 
 
-def wa_botao(classes, rotulo):
+def wa_botao(classes, rotulo, msg=None):
     return ('<details class="wa-escolha wa-btn"><summary class="%s">%s <span class="seta" aria-hidden="true"></span>'
-            '</summary>%s</details>' % (classes, rotulo, wa_lista()))
+            '</summary>%s</details>' % (classes, rotulo, wa_lista(msg=msg)))
 
 
 # ---------------------------------------------------------------- dados
@@ -155,7 +157,7 @@ def card_novidade(n, nivel="h3"):
 
 # ---------------------------------------------------------------- blocos
 NAV = [("Quem somos", "/sobre/"), ("Segmentos", "/segmentos/"), ("Como atendemos", "/como-atendemos/"),
-       ("Órgãos atendidos", "/#orgaos"), ("Novidades", "/novidades/"), ("Contato", "/contato/")]
+       ("Consultoria", "/consultoria/"), ("Órgãos atendidos", "/#orgaos"), ("Novidades", "/novidades/"), ("Contato", "/contato/")]
 
 ORGAOS = ["PMMG", "Polícia Civil MG", "DER-MG", "EPAMIG", "IEF-MG", "TCE-MG", "FHEMIG", "SEJUSP-MG", "Prefeituras",
           "Câmaras", "Universidades", "Autarquias"]
@@ -166,6 +168,52 @@ PASSOS = [
     ("Empenho / AF", "Recebemos o empenho ou a autorização de fornecimento e confirmamos prazo e garantia."),
     ("Entrega", "Entregamos no endereço indicado, dentro do prazo do empenho."),
     ("Nota fiscal e acompanhamento", "NF-e própria emitida na hora e acompanhamento até o recebimento, com garantia conforme o edital."),
+]
+
+# Consultoria e gestão em licitações (/consultoria/)
+PASSOS_CONS = [
+    ("Diagnóstico", "Conversamos sobre a sua empresa, o que ela vende e onde quer chegar no mercado público."),
+    ("Organização", "Colocamos documentos, cadastros e custos em ordem para a empresa estar apta a disputar."),
+    ("Edital certo", "Selecionamos as oportunidades e lemos cada edital antes de decidir se vale a disputa."),
+    ("Disputa", "Proposta, lances, esclarecimentos, recursos e contrarrazões, com estratégia definida."),
+    ("Execução e controle", "Empenho, entrega, nota fiscal e recebimento acompanhados, com a margem sob controle."),
+]
+
+# Sócios: formação informada pelo Júnio em 21/11/2026. Não alterar sem confirmar com ele.
+EQUIPE = [
+    ("JA", "Júnio Silva de Araújo", "Sócio-fundador · Advogado e contador",
+     "Graduado em Direito e em Ciências Contábeis pela PUC Minas, com especialização em Processo Civil "
+     "Contemporâneo pela FUMEC. Une a leitura das regras do edital ao domínio dos tributos, dos custos e do preço."),
+    ("L", "Leonardo", "Sócio-fundador · Engenheiro civil",
+     "Engenheiro civil formado pela PUC Minas. Responde pela análise técnica das especificações, "
+     "pela cotação com fornecedores e pelo planejamento de prazos e entregas."),
+]
+
+FAQ_CONS = [
+    ("Minha empresa nunca participou de licitação. Dá para começar?",
+     "Sim. Começamos pelo básico: documentos de habilitação, cadastros nos portais de compras e a escolha dos "
+     "primeiros editais compatíveis com o porte e o ramo da empresa. Microempresas e empresas de pequeno porte têm "
+     "tratamento favorecido previsto em lei, e ajudamos a usar esse direito."),
+    ("Vocês garantem que a minha empresa vai ganhar?",
+     "Não, e desconfie de quem garante. Licitação é disputa, e o resultado depende do edital, do preço e dos "
+     "concorrentes. O que entregamos é método: a empresa entra preparada, sabe até onde pode ir no preço e não perde "
+     "por erro de documento ou de prazo."),
+    ("Só o menor preço ganha?",
+     "Não. O menor lance só vence se a proposta atender ao edital e a empresa for habilitada. Muitos pregões são "
+     "decididos na análise da proposta e dos documentos do primeiro colocado, em pedidos de esclarecimento, "
+     "recursos e contrarrazões. Por isso estratégia e conhecimento do edital pesam tanto quanto o preço."),
+    ("A consultoria é pontual ou contínua?",
+     "As duas formas são possíveis: apoio pontual em um edital, em um recurso ou em uma contrarrazão, ou gestão "
+     "contínua das licitações da empresa. O formato e o valor são definidos depois do diagnóstico, conforme o escopo."),
+    ("A DPA também participa de licitações. E se disputarmos o mesmo edital?",
+     "Tratamos isso com transparência: não assessoramos uma empresa em disputa da qual a DPA participe, e avisamos "
+     "antes de começar o trabalho. As informações do cliente são tratadas com sigilo."),
+    ("A consultoria inclui ação judicial?",
+     "Não. A consultoria atua na esfera administrativa do processo licitatório e na organização da empresa. "
+     "Medidas judiciais e demais atos privativos da advocacia, quando necessários, são contratados à parte, "
+     "diretamente com advogado."),
+    ("Atendem empresas de fora de Minas Gerais?",
+     "Sim. Os pregões são eletrônicos e o atendimento é feito a distância, por WhatsApp, e-mail e videochamada."),
 ]
 
 MOSAICO = [
@@ -236,7 +284,7 @@ def jsonld_org():
         "logo": SITE + "/assets/img/logo.png",
         "image": SITE + "/assets/img/og.jpg",
         "foundingDate": "2015-01-08",
-        "description": "Fornecedora de órgãos públicos via licitações desde 2015: informática e tecnologia, climatização, eletrodomésticos, ferramentas e equipamentos, eletroeletrônicos.",
+        "description": "Fornecedora de órgãos públicos via licitações desde 2015: informática e tecnologia, climatização, eletrodomésticos, ferramentas e equipamentos, eletroeletrônicos. Também presta consultoria e gestão em licitações para empresas.",
         "email": "distribuidora.peres@hotmail.com",
         "telephone": "+55-31-99718-6304",
         "address": {"@type": "PostalAddress", "streetAddress": "Rua Antônio Germano, 688 — Palmares, 2ª Seção",
@@ -249,10 +297,42 @@ def jsonld_org():
     return '<script type="application/ld+json">%s</script>' % json.dumps(d, ensure_ascii=False)
 
 
-def timeline():
+def timeline(passos=PASSOS):
     itens = "".join('<li class="revelar"><span class="n">%d</span><div><h3>%s</h3><p>%s</p></div></li>' % (i, t, p)
-                    for i, (t, p) in enumerate(PASSOS, 1))
+                    for i, (t, p) in enumerate(passos, 1))
     return '<ol class="timeline">%s</ol>' % itens
+
+
+def equipe():
+    return '<div class="equipe">%s</div>' % "".join(
+        '<div class="card socio revelar"><div class="socio-topo"><span class="socio-av" aria-hidden="true">%s</span>'
+        '<div><h3>%s</h3><p class="socio-cargo">%s</p></div></div><p>%s</p></div>' % (ini, nome, cargo, bio)
+        for ini, nome, cargo, bio in EQUIPE)
+
+
+def faq_cons():
+    return '<div class="faq">%s</div>' % "".join(
+        '<details class="faq-item"><summary>%s</summary><p>%s</p></details>' % (e(q), e(r)) for q, r in FAQ_CONS)
+
+
+def jsonld_consultoria():
+    servico = {
+        "@context": "https://schema.org", "@type": "Service", "@id": SITE + "/consultoria/#servico",
+        "name": "Consultoria e gestão em licitações",
+        "serviceType": "Consultoria em licitações públicas",
+        "description": "Consultoria e gestão em licitações para empresas: análise de edital, formação de preço, "
+                       "proposta e lances, pedidos de esclarecimento, impugnações, recursos e contrarrazões "
+                       "administrativos e organização interna de custos e margem.",
+        "url": SITE + "/consultoria/",
+        "provider": {"@id": SITE + "/#empresa"},
+        "areaServed": {"@type": "Country", "name": "Brasil"},
+        "audience": {"@type": "BusinessAudience", "name": "Empresas que vendem ou querem vender para o setor público"},
+    }
+    faq = {"@context": "https://schema.org", "@type": "FAQPage",
+           "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": r}}
+                          for q, r in FAQ_CONS]}
+    return "".join('<script type="application/ld+json">%s</script>' % json.dumps(d, ensure_ascii=False)
+                   for d in (servico, faq))
 
 
 def orgaos():
@@ -287,9 +367,11 @@ def substituir(corpo):
     corpo = corpo.replace("<span data-anos>{{ANOS}}</span>", "<span data-anos>%d</span>" % ANOS)
     corpo = corpo.replace("{{ANOS}}", "<span data-anos>%d</span>" % ANOS)
     corpo = re.sub(r"\{\{WA_BTN:([^|}]+)(?:\|([^}]+))?\}\}", lambda m: wa_botao(m.group(1), m.group(2) or "Falar no WhatsApp"), corpo)
+    corpo = re.sub(r"\{\{WA_CONS:([^|}]+)\|([^}]+)\}\}", lambda m: wa_botao(m.group(1), m.group(2), MSG_WA_CONS), corpo)
     corpo = re.sub(r"\{\{WA:(\d+)\}\}", lambda m: e(wa_link(m.group(1))), corpo)
     blocos = {"TIMELINE": timeline, "ORGAOS": orgaos, "MOSAICO": mosaico, "SEGMENTOS_HOME": segmentos_home,
               "AVISO_NOVIDADE": aviso_novidade, "IG_GLYPH": ig_glyph,
+              "TIMELINE_CONS": lambda: timeline(PASSOS_CONS), "EQUIPE": equipe, "FAQ_CONS": faq_cons,
               "NEWS_HOME": lambda: "".join(card_novidade(n) for n in PUBLICADAS[:3]) or '<p class="vazio">Em breve.</p>'}
     for k, f in blocos.items():
         if "{{%s}}" % k in corpo:
@@ -468,13 +550,15 @@ def main():
         "sobre": ("/sobre/", "Quem somos", "Mais de uma década fornecendo para o <em>setor público</em>"),
         "segmentos": ("/segmentos/", "Segmentos", None),
         "como-atendemos": ("/como-atendemos/", "Como atendemos", None),
+        "consultoria": ("/consultoria/", "Consultoria", None),
         "contato": ("/contato/", "Contato", None),
         "privacidade": ("/privacidade/", "Privacidade", None),
     }
     for nome, (caminho, _, _) in internas.items():
         meta, corpo = ler_fonte(nome)
         corpo = re.sub(r'<section class="hero-pagina">', '<section class="hero-pagina escuro brilho">', corpo, count=1)
-        gravar(nome + "/index.html", pagina(caminho, meta["title"], meta["desc"], substituir(corpo)))
+        gravar(nome + "/index.html", pagina(caminho, meta["title"], meta["desc"], substituir(corpo),
+                                            jsonld_consultoria() if nome == "consultoria" else ""))
 
     gravar("novidades/index.html", pagina_novidades())
     gravar("novidades/feed.xml", feed())
@@ -494,7 +578,8 @@ def main():
 
     lm = ULTIMA.isoformat()
     gravar("sitemap.xml", sitemap([("/", lm, "1.0"), ("/sobre/", lm, "0.8"), ("/segmentos/", lm, "0.8"),
-                                   ("/como-atendemos/", lm, "0.9"), ("/contato/", lm, "0.7"),
+                                   ("/como-atendemos/", lm, "0.9"), ("/consultoria/", lm, "0.9"),
+                                   ("/contato/", lm, "0.7"),
                                    ("/novidades/", lm, "0.9"), ("/links/", lm, "0.6"),
                                    ("/privacidade/", PRIV_DATA.isoformat(), "0.3")]))
     og_do_periodo()

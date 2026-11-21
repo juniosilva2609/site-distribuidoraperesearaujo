@@ -106,6 +106,20 @@
     /* Contato: monta a mensagem e abre no WhatsApp do sócio escolhido ou no e-mail */
     var form = document.getElementById("form-contato");
     if (form) {
+      /* Assunto: /contato/?assunto=consultoria já abre com a opção marcada; o exemplo da mensagem acompanha o assunto */
+      var sel = form.querySelector("#assunto"), msg = form.querySelector("#mensagem"), phPadrao = msg.getAttribute("placeholder");
+      var ajustarAssunto = function () {
+        var o = sel.options[sel.selectedIndex];
+        msg.setAttribute("placeholder", o && o.getAttribute("data-chave") === "consultoria" ? msg.getAttribute("data-ph-consultoria") : phPadrao);
+      };
+      var pedido = /[?&]assunto=([a-z-]+)/.exec(location.search);
+      if (pedido) {
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].getAttribute("data-chave") === pedido[1]) sel.selectedIndex = i;
+        }
+      }
+      sel.addEventListener("change", ajustarAssunto);
+      ajustarAssunto();
       var via = "whatsapp";
       form.querySelectorAll("button[data-via]").forEach(function (b) {
         b.addEventListener("click", function () { via = b.getAttribute("data-via"); });
