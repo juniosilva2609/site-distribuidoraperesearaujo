@@ -5,10 +5,10 @@ a partir da branch `master`, no domínio `distribuidoraperesearaujo.com.br`.
 
 As páginas são **geradas** pelo `build.py` (Python 3, sem bibliotecas externas) a partir de:
 
-- `_src/pages/*.html` — conteúdo de cada página (Home, Quem somos, Segmentos, Como atendemos, Contato);
+- `_src/pages/*.html` — conteúdo de cada página (Home, Quem somos, Segmentos, Como atendemos, Consultoria, Contato);
 - `novidades/novidades.json` — notícias da aba Novidades (uma entrada por notícia).
 
-**Não edite à mão** `index.html`, `sobre/`, `segmentos/`, `como-atendemos/`, `contato/`, `novidades/index.html`,
+**Não edite à mão** `index.html`, `sobre/`, `segmentos/`, `como-atendemos/`, `consultoria/`, `contato/`, `novidades/index.html`,
 `novidades/feed.xml`, `sitemap.xml`, `404.html` nem os redirecionamentos `*.html` — edite as fontes e rode
 `python3 build.py`. A página `/links/` é a exceção: é mantida à mão em `links/index.html`.
 
@@ -21,6 +21,18 @@ Programado por data, sem depender de ninguém: logo comemorativa no header e na 
 post "DPA completa 12 anos" e `og.jpg` comemorativa. Em 01/02/2027 tudo volta ao padrão. O JavaScript faz a
 troca visual na hora exata e o workflow `.github/workflows/atualizar-site.yml` (diário, 00:07) regera o site
 e troca a `og.jpg`. Para testar: `DPA_HOJE=2027-01-10 python3 build.py` (depois rode `python3 build.py` de novo).
+
+## Consultoria e gestão em licitações (`/consultoria/`)
+
+Serviço para empresas (não para órgãos). Conteúdo em `_src/pages/consultoria.html`; no `build.py` ficam as etapas
+(`PASSOS_CONS`), as perguntas frequentes (`FAQ_CONS`, que também geram os dados estruturados para o Google), a
+mensagem do WhatsApp (`MSG_WA_CONS`, usada pelo marcador `{{WA_CONS:classes|rótulo}}`) e os sócios (`EQUIPE`, bloco
+`{{EQUIPE}}` usado também em Quem somos). O formulário de contato abre com o assunto marcado em
+`/contato/?assunto=consultoria`.
+
+Cuidados no texto: **não prometer resultado** ("garantimos a vitória"), não oferecer serviço jurídico/advocacia em nome
+da DPA (a consultoria é empresarial e atua na esfera administrativa) e não publicar formação, número ou nome de cliente
+sem confirmação do Júnio.
 
 ## Privacidade (LGPD)
 
