@@ -36,6 +36,12 @@ e troca a `og.jpg`. Para testar: `DPA_HOJE=2027-01-10 python3 build.py` (depois 
 - O formulário de contato tem o aviso de privacidade junto aos botões; ao criar novo ponto de coleta de dados, repita
   o aviso com link para a política.
 
+## Área restrita (ERP)
+
+O link "Área restrita" do rodapé e o atalho `/sistema/` (gerado pelo `build.py`, `noindex`) apenas levam à tela de
+entrar do ERP em `sistema.distribuidoraperesearaujo.com.br` (`ERP_URL` no `build.py`). **Nunca** colocar formulário de
+login, senha ou o ERP em `<iframe>` neste site: a senha só pode ser digitada no endereço do próprio sistema.
+
 ## Como ver localmente
 
 Os links usam caminhos absolutos (`/assets/...`), então sirva por HTTP:

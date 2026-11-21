@@ -33,6 +33,10 @@ FUNDACAO = dt.date(2015, 1, 8)
 # LGPD: canal de privacidade (art. 41 da LGPD e art. 11 da Res. CD/ANPD 2/2022) e vigência da política.
 # Ao mudar o texto de _src/pages/privacidade.html, atualize a data e a versão indicada na página.
 PRIV_EMAIL = "distribuidora.peres@hotmail.com"
+# Área restrita (ERP da equipe): o site só aponta para a tela de entrar. Nunca pôr formulário de login nem iframe aqui.
+ERP_URL = "https://sistema.distribuidoraperesearaujo.com.br/"
+CADEADO = ('<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/>'
+           '<path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>')
 PRIV_DATA = dt.date(2026, 11, 21)
 FESTA_INI, FESTA_FIM = dt.date(2027, 1, 8), dt.date(2027, 1, 31)
 DOMINIOS_OFICIAIS = ("planalto.gov.br", "gov.br", "portal.tcu.gov.br", "tcu.gov.br", "tce.mg.gov.br", "almg.gov.br",
@@ -208,7 +212,7 @@ def footer():
       <div><h2>Fale com a gente</h2>%s<a href="mailto:distribuidora.peres@hotmail.com">distribuidora.peres@hotmail.com</a></div>
       <div><h2>Siga a DPA</h2><a class="footer-ig" href="%s" target="_blank" rel="noopener">%s @distribuidoraperesearaujo</a><a href="/links/">Links oficiais</a><a href="/novidades/feed.xml">Feed RSS das novidades</a></div>
     </div>
-    <p class="footer-lgpd">Este site não usa cookies próprios nem rastreadores. Dados enviados pelos canais de contato são tratados conforme a LGPD. <a href="/privacidade/">Política de Privacidade e de Cookies</a> · <a href="/privacidade/#direitos">Direitos do titular</a> · <a href="/privacidade/#canal">Canal de privacidade</a></p>
+    <p class="footer-lgpd">Este site não usa cookies próprios nem rastreadores. Dados enviados pelos canais de contato são tratados conforme a LGPD. <a href="/privacidade/">Política de Privacidade e de Cookies</a> · <a href="/privacidade/#direitos">Direitos do titular</a> · <a href="/privacidade/#canal">Canal de privacidade</a> · <a class="footer-restrito" href="%s" rel="nofollow noopener noreferrer">%s Área restrita</a></p>
     <div class="footer-linha">
       <span>© <span data-ano>%d</span> Distribuidora Peres &amp; Araújo Ltda · CNPJ 21.641.059/0001-39</span>
       <span>Última atualização: <time datetime="%s">%s</time></span>
@@ -216,7 +220,7 @@ def footer():
   </div>
 </footer>
 <details class="wa-escolha wa-flutuante"><summary aria-label="Fale no WhatsApp">%s</summary>%s</details>""" % (
-        nav, socios, IG_URL, ig_glyph(), HOJE.year, ULTIMA.isoformat(), data_br(ULTIMA), WA_ICON, wa_lista())
+        nav, socios, IG_URL, ig_glyph(), ERP_URL, CADEADO, HOJE.year, ULTIMA.isoformat(), data_br(ULTIMA), WA_ICON, wa_lista())
 
 
 def jsonld_org():
@@ -420,6 +424,17 @@ def redirecionar(destino):
 """ % (SITE, destino, destino, destino, destino, SITE, destino)
 
 
+def atalho_sistema():
+    """/sistema/ -> tela de entrar do ERP. Destino fixo (não aceita parâmetro), fora dos buscadores e do sitemap."""
+    return """<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Área restrita — Distribuidora Peres &amp; Araújo</title>
+<meta name="robots" content="noindex, nofollow"><meta name="referrer" content="no-referrer">
+<meta http-equiv="refresh" content="0; url=%s">
+<script>location.replace("%s")</script></head>
+<body><p>Área restrita da equipe: <a href="%s" rel="nofollow noopener noreferrer">entrar no sistema</a></p></body></html>
+""" % (ERP_URL, ERP_URL, ERP_URL)
+
+
 def sitemap(paginas):
     urls = "".join("\n  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>" % (SITE, p, lm, pr)
                    for p, lm, pr in paginas)
@@ -474,6 +489,8 @@ def main():
     for antigo, novo in (("sobre.html", "/sobre/"), ("segmentos.html", "/segmentos/"),
                          ("licitacoes.html", "/como-atendemos/"), ("contato.html", "/contato/")):
         gravar(antigo, redirecionar(novo))
+
+    gravar("sistema/index.html", atalho_sistema())
 
     lm = ULTIMA.isoformat()
     gravar("sitemap.xml", sitemap([("/", lm, "1.0"), ("/sobre/", lm, "0.8"), ("/segmentos/", lm, "0.8"),
