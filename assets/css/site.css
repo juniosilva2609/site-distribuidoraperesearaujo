@@ -95,6 +95,8 @@ h2 em,h1 em{font-style:normal;color:var(--red)}
 .wa-lista small{display:block;font-size:12.5px;color:var(--muted)}
 .wa-lista .tit{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding:8px 12px 4px;font-weight:700}
 .wa-btn .wa-lista{left:0;right:auto}
+/* a lista aberta fica acima dos blocos vizinhos (que criam camada própria pela animação de entrada) */
+.botoes:has(.wa-escolha[open]){position:relative;z-index:95}
 .wa-header summary{display:inline-flex;align-items:center;gap:8px;margin-left:10px;padding:11px 16px;border-radius:12px;font-weight:700;font-size:14px;color:#fff;background:linear-gradient(145deg,var(--red-2),var(--red) 45%,var(--red-deep));box-shadow:0 10px 22px -12px rgba(215,20,26,.9);white-space:nowrap}
 
 /* ---------- Hero ---------- */
@@ -387,7 +389,8 @@ h2 em,h1 em{font-style:normal;color:var(--red)}
   .grid-3,.news-grid{grid-template-columns:1fr}
   .hero-card .num{font-size:40px}
   .botoes .btn,.botoes .wa-escolha,.botoes .wa-escolha summary{width:100%}
-  .botoes .wa-escolha .wa-lista{left:0;right:0;transform:none;min-width:0}
+  /* no celular a lista abre no fluxo da página, empurrando o conteúdo: nunca fica coberta nem cortada */
+  .botoes .wa-escolha .wa-lista{position:static;margin-top:10px;transform:none;min-width:0}
   .footer-grid{grid-template-columns:1fr}
   .mosaico{gap:6px}
   .mosaico a{border-radius:10px}
