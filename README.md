@@ -22,6 +22,20 @@ post "DPA completa 12 anos" e `og.jpg` comemorativa. Em 01/02/2027 tudo volta ao
 troca visual na hora exata e o workflow `.github/workflows/atualizar-site.yml` (diário, 00:07) regera o site
 e troca a `og.jpg`. Para testar: `DPA_HOJE=2027-01-10 python3 build.py` (depois rode `python3 build.py` de novo).
 
+## Privacidade (LGPD)
+
+- Política de Privacidade e de Cookies: `_src/pages/privacidade.html` → `/privacidade/` (link no rodapé de todas as
+  páginas e na `/links/`). Canal de privacidade e data de vigência ficam em `PRIV_EMAIL` e `PRIV_DATA` no `build.py`.
+  Mudou o texto? Atualize a data e a versão no topo da página.
+- O site **não usa cookies, armazenamento local, estatística nem scripts de terceiros** — por isso não há banner de
+  cookies. **Antes de incluir** Google Analytics, pixel, fontes externas, vídeo/mapa incorporado ou qualquer recurso de
+  terceiro, é obrigatório: (1) bloquear o recurso até o consentimento do visitante, com opção de recusar tão fácil
+  quanto a de aceitar; (2) atualizar a seção "Cookies" da política.
+- O mapa do Google em `/contato/` só carrega com o clique do visitante (consentimento). Não volte a pôr o `<iframe>`
+  direto no HTML.
+- O formulário de contato tem o aviso de privacidade junto aos botões; ao criar novo ponto de coleta de dados, repita
+  o aviso com link para a política.
+
 ## Como ver localmente
 
 Os links usam caminhos absolutos (`/assets/...`), então sirva por HTTP:

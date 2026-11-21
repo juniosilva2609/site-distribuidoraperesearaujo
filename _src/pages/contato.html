@@ -55,6 +55,7 @@
           <button type="submit" class="btn btn-primario" data-via="whatsapp">Enviar pelo WhatsApp</button>
           <button type="submit" class="btn btn-outline" data-via="email">Enviar por e-mail</button>
         </div>
+        <p class="form-lgpd">Este formulário não envia nem armazena nada no site: ele apenas monta a mensagem, que você envia pelo seu WhatsApp ou e-mail. Usamos os dados informados somente para responder ao seu contato e elaborar a proposta, conforme a LGPD. Preencha só o necessário. Saiba mais na <a href="/privacidade/">Política de Privacidade</a>.</p>
       </form>
 
       <div>
@@ -90,8 +91,14 @@
             </div>
           </div>
         </div>
-        <div class="mapa">
-          <iframe src="https://www.google.com/maps?q=Rua+Ant%C3%B4nio+Germano,+688,+Palmares,+Ibirit%C3%A9,+MG,+32430-090&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização da Distribuidora Peres & Araújo"></iframe>
+        <div class="mapa" id="mapa" data-src="https://www.google.com/maps?q=Rua+Ant%C3%B4nio+Germano,+688,+Palmares,+Ibirit%C3%A9,+MG,+32430-090&amp;output=embed">
+          <div class="mapa-aviso">
+            <p><strong>Mapa do Google</strong>Para proteger sua privacidade, o mapa só é carregado se você pedir. Ao carregar, o Google recebe seu endereço IP e pode gravar cookies no seu navegador (<a href="/privacidade/#cookies">saiba mais</a>).</p>
+            <div class="mapa-botoes">
+              <button type="button" class="btn btn-outline" id="mapa-carregar">Carregar mapa</button>
+              <a class="btn-link" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Ant%C3%B4nio+Germano,+688,+Palmares,+Ibirit%C3%A9,+MG,+32430-090" target="_blank" rel="noopener">Abrir no Google Maps ↗<span class="sr-only"> (abre em nova aba)</span></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ Uso:
 Variável opcional DPA_HOJE=AAAA-MM-DD simula outra data (testes do período de 12 anos).
 
 Fontes:   _src/pages/*.html (conteúdo das páginas) e novidades/novidades.json (notícias).
-Geradas:  index.html, sobre/, segmentos/, como-atendemos/, contato/, novidades/ (+ feed.xml),
+Geradas:  index.html, sobre/, segmentos/, como-atendemos/, contato/, privacidade/, novidades/ (+ feed.xml),
           404.html, sitemap.xml, páginas antigas *.html (redirecionamento) e a og.jpg do período.
 Não edite as páginas geradas à mão: edite _src/ ou o JSON e rode o build.
 A página /links/ é mantida à parte (links/index.html) e não é gerada aqui.
@@ -30,6 +30,10 @@ MSG_WA = ("Olá, tudo bem? Acessei o site da Distribuidora Peres & Araújo e gos
 SOCIOS = [("Leonardo", "5531997186304", "(31) 99718-6304"), ("Júnio", "5531998902018", "(31) 99890-2018")]
 CATEGORIAS = {"Licitações": "licitacoes", "Reforma Tributária": "reforma", "DPA": "dpa"}
 FUNDACAO = dt.date(2015, 1, 8)
+# LGPD: canal de privacidade (art. 41 da LGPD e art. 11 da Res. CD/ANPD 2/2022) e vigência da política.
+# Ao mudar o texto de _src/pages/privacidade.html, atualize a data e a versão indicada na página.
+PRIV_EMAIL = "distribuidora.peres@hotmail.com"
+PRIV_DATA = dt.date(2026, 11, 21)
 FESTA_INI, FESTA_FIM = dt.date(2027, 1, 8), dt.date(2027, 1, 31)
 DOMINIOS_OFICIAIS = ("planalto.gov.br", "gov.br", "portal.tcu.gov.br", "tcu.gov.br", "tce.mg.gov.br", "almg.gov.br",
                      "mg.gov.br", "fazenda.mg.gov.br", "planejamento.mg.gov.br", "camara.leg.br", "senado.leg.br",
@@ -204,6 +208,7 @@ def footer():
       <div><h2>Fale com a gente</h2>%s<a href="mailto:distribuidora.peres@hotmail.com">distribuidora.peres@hotmail.com</a></div>
       <div><h2>Siga a DPA</h2><a class="footer-ig" href="%s" target="_blank" rel="noopener">%s @distribuidoraperesearaujo</a><a href="/links/">Links oficiais</a><a href="/novidades/feed.xml">Feed RSS das novidades</a></div>
     </div>
+    <p class="footer-lgpd">Este site não usa cookies próprios nem rastreadores. Dados enviados pelos canais de contato são tratados conforme a LGPD. <a href="/privacidade/">Política de Privacidade e de Cookies</a> · <a href="/privacidade/#direitos">Direitos do titular</a> · <a href="/privacidade/#canal">Canal de privacidade</a></p>
     <div class="footer-linha">
       <span>© <span data-ano>%d</span> Distribuidora Peres &amp; Araújo Ltda · CNPJ 21.641.059/0001-39</span>
       <span>Última atualização: <time datetime="%s">%s</time></span>
@@ -286,6 +291,8 @@ def substituir(corpo):
         if "{{%s}}" % k in corpo:
             corpo = corpo.replace("{{%s}}" % k, f())
     corpo = corpo.replace("{{ANOS}}", str(ANOS))
+    corpo = (corpo.replace("{{PRIV_EMAIL}}", PRIV_EMAIL).replace("{{PRIV_DATA_ISO}}", PRIV_DATA.isoformat())
+             .replace("{{PRIV_DATA}}", data_extenso(PRIV_DATA)))
     falta = re.findall(r"\{\{[^}]+\}\}", corpo)
     if falta:
         sys.exit("ERRO: marcador sem valor: %s" % falta)
@@ -447,6 +454,7 @@ def main():
         "segmentos": ("/segmentos/", "Segmentos", None),
         "como-atendemos": ("/como-atendemos/", "Como atendemos", None),
         "contato": ("/contato/", "Contato", None),
+        "privacidade": ("/privacidade/", "Privacidade", None),
     }
     for nome, (caminho, _, _) in internas.items():
         meta, corpo = ler_fonte(nome)
@@ -470,7 +478,8 @@ def main():
     lm = ULTIMA.isoformat()
     gravar("sitemap.xml", sitemap([("/", lm, "1.0"), ("/sobre/", lm, "0.8"), ("/segmentos/", lm, "0.8"),
                                    ("/como-atendemos/", lm, "0.9"), ("/contato/", lm, "0.7"),
-                                   ("/novidades/", lm, "0.9"), ("/links/", lm, "0.6")]))
+                                   ("/novidades/", lm, "0.9"), ("/links/", lm, "0.6"),
+                                   ("/privacidade/", PRIV_DATA.isoformat(), "0.3")]))
     og_do_periodo()
     print("Site gerado para %s (%d anos%s). Novidades publicadas: %d. Última: %s." % (
         data_br(HOJE), ANOS, ", período 12 anos" if FESTA else "", len(PUBLICADAS),

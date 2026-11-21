@@ -88,6 +88,21 @@
       });
     });
 
+    /* Contato: o mapa do Google só é carregado com o clique do visitante (LGPD: consentimento prévio) */
+    var mapa = document.getElementById("mapa"), btnMapa = document.getElementById("mapa-carregar");
+    if (mapa && btnMapa) {
+      btnMapa.addEventListener("click", function () {
+        var f = document.createElement("iframe");
+        f.src = mapa.getAttribute("data-src");
+        f.title = "Localização da Distribuidora Peres & Araújo";
+        f.loading = "lazy";
+        f.referrerPolicy = "no-referrer";
+        mapa.textContent = "";
+        mapa.appendChild(f);
+        f.focus();
+      });
+    }
+
     /* Contato: monta a mensagem e abre no WhatsApp do sócio escolhido ou no e-mail */
     var form = document.getElementById("form-contato");
     if (form) {
