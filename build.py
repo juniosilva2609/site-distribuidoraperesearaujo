@@ -172,7 +172,7 @@ PASSOS = [
 
 # Consultoria e gestão em licitações (/consultoria/)
 PASSOS_CONS = [
-    ("Diagnóstico", "Conversamos sobre a sua empresa, o que ela vende e onde quer chegar no mercado público."),
+    ("Diagnóstico gratuito", "Conversamos sobre a sua empresa, o que ela vende e onde quer chegar no mercado público."),
     ("Organização", "Colocamos documentos, cadastros e custos em ordem para a empresa estar apta a disputar."),
     ("Edital certo", "Selecionamos as oportunidades e lemos cada edital antes de decidir se vale a disputa."),
     ("Disputa", "Proposta, lances, esclarecimentos, recursos e contrarrazões, com estratégia definida."),
@@ -184,7 +184,7 @@ EQUIPE = [
     ("JA", "Júnio Silva de Araújo", "Sócio-fundador · Advogado e contador",
      "Graduado em Direito e em Ciências Contábeis pela PUC Minas, com especialização em Processo Civil "
      "Contemporâneo pela FUMEC. Une a leitura das regras do edital ao domínio dos tributos, dos custos e do preço."),
-    ("L", "Leonardo", "Sócio-fundador · Engenheiro civil",
+    ("LF", "Leonardo Peres de Faria", "Sócio-fundador · Engenheiro civil",
      "Engenheiro civil formado pela PUC Minas. Responde pela análise técnica das especificações, "
      "pela cotação com fornecedores e pelo planejamento de prazos e entregas."),
 ]
